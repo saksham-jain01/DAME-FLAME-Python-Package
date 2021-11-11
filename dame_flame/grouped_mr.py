@@ -69,7 +69,7 @@ def algo2_GroupedMR(df_all, df_unmatched, covs_match_on, all_covs, treatment_col
 
             num_t = len((df_all.loc[units_in_g, :])[treatment_column_name == 1])
             num_c = len((df_all.loc[units_in_g, :])[treatment_column_name == 0])
-            if num_t>5 and num_c > 5:
+            if num_t > 5 and num_c > 5:
                 all_units_in_g.append(list(units_in_g))
             else:
                 continue
