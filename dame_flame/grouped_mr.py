@@ -66,9 +66,9 @@ def algo2_GroupedMR(df_all, df_unmatched, covs_match_on, all_covs, treatment_col
         newly_matched = [i for i in units_in_g if i in df_unmatched.index]
         # Only need to proceed to fill in the return table if someone's MMG found.
         if len(newly_matched) != 0:
-
-            num_t = len((df_all.loc[units_in_g, :])[treatment_column_name == 1])
-            num_c = len((df_all.loc[units_in_g, :])[treatment_column_name == 0])
+            df_units_in_g = df_all.loc[units_in_g,:]
+            num_t = len(df_units_in_g.loc[df_units_in_g[treatment_column_name] == 1])
+            num_c = len(df_units_in_g.loc[df_units_in_g[treatment_column_name] == 0])
             if num_t > 5 and num_c > 5:
                 all_units_in_g.append(list(units_in_g))
             else:
