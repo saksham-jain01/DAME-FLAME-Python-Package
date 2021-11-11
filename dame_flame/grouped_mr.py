@@ -94,7 +94,7 @@ def algo2_GroupedMR(df_all, df_unmatched, covs_match_on, all_covs, treatment_col
             # don't update that when someone gets added to an auxiliary matched group
             # then at the end, iterate through it and create the nicely formatted output.
             
-    all_units_in_g_flattened = [item for all_units_in_g in t for item in all_units_in_g]
+    all_units_in_g_flattened = [item for sublist in all_units_in_g for item in sublist]
     matched_rows_ = matched_rows.loc[all_units_in_g_flattened]
             
     return matched_rows_, return_groups, all_units_in_g
