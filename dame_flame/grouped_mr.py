@@ -67,7 +67,12 @@ def algo2_GroupedMR(df_all, df_unmatched, covs_match_on, all_covs, treatment_col
         # Only need to proceed to fill in the return table if someone's MMG found.
         if len(newly_matched) != 0:
 
-            all_units_in_g.append(list(units_in_g))
+            num_t = len((df_all.loc[units_in_g, :])[treatment_column_name == 1])
+            num_c = len((df_all.loc[units_in_g, :])[treatment_column_name == 0])
+            if num_t>5 and num_c > 5:
+                all_units_in_g.append(list(units_in_g))
+            else:
+                continue
 
             # Now, we figure out: What does the group look like? eg [1,2,*,1]
             temp_row_in_group = matched_rows.loc[units_in_g[0]]
@@ -88,5 +93,8 @@ def algo2_GroupedMR(df_all, df_unmatched, covs_match_on, all_covs, treatment_col
             # persons unit id.
             # don't update that when someone gets added to an auxiliary matched group
             # then at the end, iterate through it and create the nicely formatted output.
-
-    return matched_rows, return_groups, all_units_in_g
+            
+    all_units_in_g_flattened = [item for all_units_in_g in t for item in all_units_in_g]
+    matched_rows_ = matched_rows.loc[all_units_in_g_flattened]
+            
+    return matched_rows_, return_groups, all_units_in_g
