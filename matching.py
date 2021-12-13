@@ -294,7 +294,7 @@ class FLAME(MatchParent):
                     self.bf_each_iter.append(return_val[-1])
 
 
-        return self.df_units_and_covars_matched, self.pe_each_iter, self.bf_each_iter
+        return [self.df_units_and_covars_matched, self.pe_each_iter, self.bf_each_iter]
 
 
 def _DAME(df, df_holdout, treatment_column_name='treated', weight_array=False,
